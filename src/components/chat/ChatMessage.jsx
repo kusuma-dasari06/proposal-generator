@@ -102,6 +102,10 @@ export default function ChatMessage({ message, index, onEdit, onDelete }) {
     if (isEditing && editRef.current) {
       editRef.current.focus();
       editRef.current.setSelectionRange(editText.length, editText.length);
+      // Auto-size to fit full content (Issue #5 fix)
+      const el = editRef.current;
+      el.style.height = 'auto';
+      el.style.height = Math.min(el.scrollHeight, 300) + 'px';
     }
   }, [isEditing]);
 
@@ -153,9 +157,15 @@ export default function ChatMessage({ message, index, onEdit, onDelete }) {
               ref={editRef}
               className="message-edit-input"
               value={editText}
-              onChange={(e) => setEditText(e.target.value)}
+              onChange={(e) => {
+                setEditText(e.target.value);
+                // Auto-resize on input
+                const el = e.target;
+                el.style.height = 'auto';
+                el.style.height = Math.min(el.scrollHeight, 300) + 'px';
+              }}
               onKeyDown={handleEditKeyDown}
-              rows={2}
+              rows={3}
             />
             <div className="message-edit-actions">
               <button className="btn-edit-save" onClick={handleSaveEdit}>

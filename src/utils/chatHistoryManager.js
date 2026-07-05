@@ -81,6 +81,7 @@ export async function loadChat(chatId) {
       .from('proposal_sessions')
       .select('*')
       .eq('session_id', chatId)
+      .eq('device_id', getDeviceId())
       .single();
 
     if (error) {
@@ -116,6 +117,7 @@ export async function listChats() {
     const { data, error } = await supabase
       .from('proposal_sessions')
       .select('session_id, client_name, client_type, created_at, updated_at')
+      .eq('device_id', getDeviceId())
       .order('updated_at', { ascending: false });
 
     if (error) {

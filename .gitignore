@@ -23,3 +23,5 @@ Thumbs.db
 
 # Vercel
 .vercel/
+
+testsprite_tests\tmp\config.json

@@ -4,7 +4,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { COLLECTION_SYSTEM_PROMPT } from '../../prompts/collectionPrompt';
+import { getCollectionPrompt, getDefaultPrompt } from '../../utils/promptManager';
 
 const panelVariants = {
   hidden: { opacity: 0, y: 20, scale: 0.95 },
@@ -33,7 +33,7 @@ export default function SystemPromptPanel({
   const textareaRef = useRef(null);
 
   // The current effective prompt
-  const currentPrompt = customSystemPrompt || COLLECTION_SYSTEM_PROMPT;
+  const currentPrompt = customSystemPrompt || getCollectionPrompt();
 
   useEffect(() => {
     if (isOpen) {
@@ -49,7 +49,7 @@ export default function SystemPromptPanel({
   }, [isEditMode]);
 
   const handleApply = () => {
-    if (editText.trim() !== COLLECTION_SYSTEM_PROMPT) {
+    if (editText.trim() !== getCollectionPrompt()) {
       onApply(editText.trim());
     } else {
       onApply(null); // Reset to default
@@ -59,7 +59,7 @@ export default function SystemPromptPanel({
   };
 
   const handleReset = () => {
-    setEditText(COLLECTION_SYSTEM_PROMPT);
+    setEditText(getCollectionPrompt());
     onApply(null);
     setIsEditMode(false);
   };

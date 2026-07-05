@@ -4,7 +4,7 @@
 
 import { useState, useCallback } from 'react';
 import { generateProposal } from '../api/aiProvider';
-import { GENERATION_SYSTEM_PROMPT } from '../prompts/generationPrompt';
+import { getGenerationPrompt } from '../utils/promptManager';
 import { saveSession } from '../utils/sessionManager';
 
 export function useProposal() {
@@ -25,7 +25,7 @@ export function useProposal() {
           year: 'numeric',
         });
 
-        const fullPrompt = `${GENERATION_SYSTEM_PROMPT}
+        const fullPrompt = `${getGenerationPrompt()}
 
 ---
 **CRITICAL INSTRUCTION**: The current date is ${currentDate}. You MUST use exactly "${currentDate}" wherever the date is required, especially replacing {{DATE}}.

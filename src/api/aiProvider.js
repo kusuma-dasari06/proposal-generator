@@ -178,30 +178,118 @@ async function openaiGenerate(prompt) {
   return openaiChat([{ role: 'user', content: prompt }], '');
 }
 
+// ── Ollama Local Client ───────────────────────────────────────
+async function ollamaChat(history, systemPrompt) {
+  const model = import.meta.env.VITE_OLLAMA_MODEL || 'qwen';
+  const baseUrl = import.meta.env.VITE_OLLAMA_BASE_URL || 'http://localhost:11434';
+
+  const messages = [];
+  if (systemPrompt) {
+    messages.push({ role: 'system', content: systemPrompt });
+  }
+  
+  messages.push(...history.map((m) => ({
+    role: m.role === 'assistant' ? 'assistant' : 'user',
+    content: m.content,
+  })));
+
+  const response = await fetch(`${baseUrl}/api/chat`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      model,
+      messages,
+      stream: false,
+    }),
+  });
+
+  if (!response.ok) {
+    let errMsg = 'Ollama API error';
+    try {
+      const err = await response.json();
+      errMsg = err.error || errMsg;
+    } catch (e) {}
+    throw new Error(errMsg);
+  }
+  const data = await response.json();
+  return data.message.content;
+}
+
+async function ollamaGenerate(prompt) {
+  const model = import.meta.env.VITE_OLLAMA_MODEL || 'qwen';
+  const baseUrl = import.meta.env.VITE_OLLAMA_BASE_URL || 'http://localhost:11434';
+  
+  const response = await fetch(`${baseUrl}/api/generate`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      model,
+      prompt,
+      stream: false,
+    }),
+  });
+  
+  if (!response.ok) {
+    let errMsg = 'Ollama API error';
+    try {
+      const err = await response.json();
+      errMsg = err.error || errMsg;
+    } catch (e) {}
+    throw new Error(errMsg);
+  }
+  const data = await response.json();
+  return data.response;
+}
+
 // ── Public API (provider-agnostic) ───────────────────────────
 
 /**
- * Send a message in a conversation (Prompt 1 — Collection Agent)
+ * Send a message in a conversation (Prompt 1 — Collection Agent & Co-pilot)
+ * Automatically falls back to Gemini API if the active provider fails.
  * @param {Array<{role: 'user'|'assistant', content: string}>} history
  * @param {string} systemPrompt
  * @returns {Promise<string>} AI response text
  */
 export async function sendMessage(history, systemPrompt) {
-  if (PROVIDER === 'claude') return claudeChat(history, systemPrompt);
-  if (PROVIDER === 'nvidia' || PROVIDER === 'openai') return openaiChat(history, systemPrompt);
-  return geminiChat(history, systemPrompt);
+  try {
+    if (PROVIDER === 'claude') return await claudeChat(history, systemPrompt);
+    if (PROVIDER === 'nvidia' || PROVIDER === 'openai') return await openaiChat(history, systemPrompt);
+    if (PROVIDER === 'ollama') return await ollamaChat(history, systemPrompt);
+    return await geminiChat(history, systemPrompt);
+  } catch (err) {
+    if (PROVIDER !== 'gemini') {
+      console.warn(`[AIProvider] ${PROVIDER.toUpperCase()} failed ("${err.message}"). Automatically falling back to Gemini API...`);
+      return await geminiChat(history, systemPrompt);
+    }
+    throw err;
+  }
 }
 
 /**
  * Generate a proposal from JSON (Prompt 2 — Generation Agent)
+ * Automatically falls back to Gemini API if the active provider fails.
  * @param {string} fullPrompt - system instructions + JSON merged
  * @returns {Promise<string>} HTML proposal string
  */
 export async function generateProposal(fullPrompt) {
   let html = '';
-  if (PROVIDER === 'claude') html = await claudeGenerate(fullPrompt);
-  else if (PROVIDER === 'nvidia' || PROVIDER === 'openai') html = await openaiGenerate(fullPrompt);
-  else html = await geminiGenerate(fullPrompt);
+  try {
+    if (PROVIDER === 'claude') html = await claudeGenerate(fullPrompt);
+    else if (PROVIDER === 'nvidia' || PROVIDER === 'openai') html = await openaiGenerate(fullPrompt);
+    else if (PROVIDER === 'ollama') html = await ollamaGenerate(fullPrompt);
+    else html = await geminiGenerate(fullPrompt);
+  } catch (err) {
+    if (PROVIDER !== 'gemini') {
+      console.warn(`[AIProvider] ${PROVIDER.toUpperCase()} generation failed ("${err.message}"). Automatically falling back to Gemini API...`);
+      html = await geminiGenerate(fullPrompt);
+    } else {
+      throw err;
+    }
+  }
 
   // Strip markdown code fences if the AI includes them
   return html.replace(/```html/gi, '').replace(/```/g, '').trim();

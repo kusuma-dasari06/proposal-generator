@@ -66,11 +66,45 @@ Section 11 (Important Notes):
 Section 12 (Conclusion):
 - "conclusionText" → string → wrap in \`<p>\` tags.
 
+Section Titles (any section):
+- "sectionTitles" → object → maps section keys to custom title strings.
+  Keys: "clientInfo", "overview", "objectives", "serviceScope", "socialMedia", "gmb", "seo", "paidAds", "leadGen", "lmt", "reporting", "deliverables", "contentStrategy", "addOns", "otherStrategies", "pricing", "whyAtoms", "importantNotes", "conclusion"
+  BEFORE generating each section's \`<h2 class="section-title">\` or \`<h3>\` tag, check if sectionTitles exists and contains a key for that section. If it does, use the custom title. Otherwise, use the default title.
+  Example: If sectionTitles.objectives = "Our Goals", then output \`<h2 class="section-title">Our Goals</h2>\` instead of the default "Objectives of Digital Marketing".
+
+Custom Sections:
+- "customSections" → array of objects → each with {title, content, position}.
+  For each custom section:
+  - Wrap in \`<div class="proposal-section">\`
+  - Use title as \`<h2 class="section-title">[title]</h2>\`
+  - If content is a string, wrap in \`<p>\` tags.
+  - If content is an array of strings, format each as \`<li>\` inside \`<ul>\`.
+  - The "position" field specifies where to insert the section (e.g., "after:deliverables" means insert after the Deliverables section).
+  - Position key mapping: "clientInfo" = Section 2, "overview" = Section 3, "objectives" = Section 4, "serviceScope" = Section 5, "deliverables" = Section 6, "contentStrategy" = Section 7, "addOns" = Section 8, "otherStrategies" = Other Strategies, "pricing" = Section 9, "whyAtoms" = Section 10, "importantNotes" = Section 11, "conclusion" = Section 12.
+  - If position is missing, default to after Section 11 (Important Notes).
+
 ---
 
 ## PROPOSAL TEMPLATE STRUCTURE (Strict Order)
 
-The proposal must match the format of existing Atoms proposals exactly. The sections below define every slot in order. Do not add, remove, or reorder sections.
+The proposal must match the format of existing Atoms proposals exactly. The sections below define every slot in order. Do not add or reorder sections (except for custom sections inserted at their specified positions).
+
+**SECTION TITLE OVERRIDE CHECK**: For EVERY section below, BEFORE outputting the section title in an \`<h2>\` or \`<h3>\` tag, check if overrides.sectionTitles exists and contains a corresponding key. If it does, use the custom title. Otherwise, use the default title specified in each section.
+
+Section key mapping for sectionTitles:
+- Section 2 → key: "clientInfo" (default: "Client Information")
+- Section 3 → key: "overview" (default: varies by client type)
+- Section 4 → key: "objectives" (default: varies by client type)
+- Section 5 → key: "serviceScope" (default: "Recommended Service Scope")
+- Section 5 sub-sections → keys: "socialMedia", "gmb", "seo", "paidAds", "leadGen", "lmt", "reporting"
+- Section 6 → key: "deliverables" (default: "Monthly Deliverables")
+- Section 7 → key: "contentStrategy" (default: varies by client type)
+- Section 8 → key: "addOns" (default: "Optional Growth Add-Ons")
+- Other Strategies → key: "otherStrategies" (default: "Other Strategies")
+- Section 9 → key: "pricing" (default: "Investment" or "Pricing")
+- Section 10 → key: "whyAtoms" (default: "Why Atoms Digital Solutions?")
+- Section 11 → key: "importantNotes" (default: "Important Notes")
+- Section 12 → key: "conclusion" (default: varies by client type)
 
 1. HEADER (Fixed)
 2. CLIENT TITLE BLOCK (Variable)
@@ -611,4 +645,16 @@ Use regular bullet points (●) everywhere else.
 CSS class names to use: proposal-header, agency-name, agency-tagline, proposal-meta, proposal-label, proposal-date, proposal-section, section-title, section-subtitle, pricing-line, pricing-note, proposal-footer, footer-note.
 
 Replace all placeholders with actual values from JSON.
+
+**CUSTOM SECTIONS RENDERING:**
+If overrides.customSections exists and is a non-empty array, render each custom section at its specified position. For each custom section:
+1. Parse the "position" field (e.g., "after:deliverables") to determine where to insert the section.
+2. Wrap in \`<div class="proposal-section">\`.
+3. Use the title as \`<h2 class="section-title">[title]</h2>\`.
+4. If content is a string, wrap in \`<p>\` tags.
+5. If content is an array of strings, format each as \`<li>\` inside \`<ul>\`.
+6. If the position references a section that doesn't exist in this proposal, insert the custom section before the footer.
+
+**CROSS-DEVICE CONSISTENCY (Issue #8):**
+CRITICAL: Use ONLY the CSS classes defined in the template above. Do NOT use inline styles that reference system fonts, viewport units (vw, vh), or device-specific values. All font sizes must use fixed units (pt or px). Do NOT use em or rem for critical layout elements. This ensures the proposal renders identically across different devices and screen resolutions.
 `;

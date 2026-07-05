@@ -3,7 +3,7 @@
 // Sidebar is now persistent at the App level (Gemini layout)
 // ============================================================
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import ChatMessage from './ChatMessage';
 import TypingIndicator from './TypingIndicator';
@@ -27,6 +27,15 @@ export default function ChatInterface({
   const messagesContainerRef = useRef(null);
   const inputRef = useRef(null);
 
+  // ── Auto-resize textarea to fit content (Issue #4 fix) ──────
+  const autoResize = useCallback((el) => {
+    if (!el) return;
+    el.style.height = 'auto';
+    const maxH = 160; // ~8 lines
+    el.style.height = Math.min(el.scrollHeight, maxH) + 'px';
+    el.style.overflowY = el.scrollHeight > maxH ? 'auto' : 'hidden';
+  }, []);
+
   useEffect(() => {
     if (messagesContainerRef.current) {
       messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
@@ -42,6 +51,11 @@ export default function ChatInterface({
     if (!input.trim() || isTyping || isGenerating) return;
     onSendMessage(input.trim());
     setInput('');
+    // Reset textarea height after send
+    if (inputRef.current) {
+      inputRef.current.style.height = 'auto';
+      inputRef.current.style.overflowY = 'hidden';
+    }
   };
 
   const handleKeyDown = (e) => {
@@ -109,7 +123,10 @@ export default function ChatInterface({
             ref={inputRef}
             className="chat-input"
             value={input}
-            onChange={(e) => setInput(e.target.value)}
+            onChange={(e) => {
+              setInput(e.target.value);
+              autoResize(e.target);
+            }}
             onKeyDown={handleKeyDown}
             placeholder={
               isRefinementMode

@@ -452,9 +452,11 @@ body {
   line-height: 1.5;
   padding: 8px 10px;
   resize: vertical;
-  min-height: 44px;
+  min-height: 64px;
+  max-height: 300px;
+  overflow-y: auto;
   outline: none;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, height 0.1s ease;
 }
 
 .message-edit-input:focus {
@@ -1361,7 +1363,7 @@ body {
 
 .input-wrapper {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   gap: 8px;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 6px;
@@ -1384,9 +1386,11 @@ body {
   font-size: 0.875rem;
   line-height: 1.4;
   resize: none;
-  max-height: 80px;
-  overflow-y: auto;
+  min-height: 24px;
+  max-height: 160px;
+  overflow-y: hidden;
   padding: 2px 4px;
+  transition: height 0.1s ease;
 }
 
 .chat-input::placeholder {
@@ -1666,6 +1670,14 @@ body {
   padding: 28px 32px;
   border: 1px solid rgba(255, 255, 255, 0.4);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  /* Issue #8: Normalize rendering across devices */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .proposal-content .proposal-header {

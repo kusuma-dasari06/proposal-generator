@@ -5,7 +5,7 @@
 
 import { useState, useCallback, useRef, useEffect } from 'react';
 import { sendMessage } from '../api/aiProvider';
-import { COLLECTION_SYSTEM_PROMPT } from '../prompts/collectionPrompt';
+import { getCollectionPrompt } from '../utils/promptManager';
 import {
   generateChatId,
   saveChat,
@@ -52,7 +52,8 @@ export function useChat({ onProposalJsonReady }) {
   const [chatList, setChatList] = useState([]);
   const [customSystemPrompt, setCustomSystemPrompt] = useState(null);
   // ── Active system prompt ──────────────────────────────────────
-  const activeSystemPrompt = customSystemPrompt || COLLECTION_SYSTEM_PROMPT;
+  // Priority: per-session custom > Supabase-stored > hardcoded default
+  const activeSystemPrompt = customSystemPrompt || getCollectionPrompt();
 
   // ── Load chat list on mount ───────────────────────────────────
   useEffect(() => {
