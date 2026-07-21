@@ -22,6 +22,7 @@ export async function saveSession({
   conversationHistory,
   finalProposal,
   proposalJson,
+  proposalSections,
 }) {
   if (!supabase) {
     console.warn('[Session] Supabase not configured — skipping save.');
@@ -37,11 +38,14 @@ export async function saveSession({
         conversation_history: conversationHistory,
         final_proposal: finalProposal,
         proposal_json: proposalJson,
+        // Section-wise JSON — only the section(s) that actually changed
+        // are different from the previous save; everything else is
+        // carried over untouched.
+        proposal_sections: proposalSections || null,
         updated_at: new Date().toISOString(),
       },
       { onConflict: 'session_id' }
     );
-
     if (error) {
       console.error('[Session] Supabase save error:', error.message);
     } else {

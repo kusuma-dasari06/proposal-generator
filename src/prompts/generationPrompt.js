@@ -129,7 +129,7 @@ Section key mapping for sectionTitles:
 
 ## 1. HEADER — FIXED (Never changes)
 
-<div class="proposal-header">
+<div class="proposal-header" data-section="header">
   <div class="agency-name">ATOMS DIGITAL SOLUTIONS PRIVATE LIMITED</div>
   <div class="agency-tagline">Digital Marketing Proposal</div>
   <div class="proposal-meta">
@@ -622,7 +622,7 @@ OR: "We would be happy to understand your specialty, goals, and vision to custom
 
 ## 13. FOOTER — FIXED (Never changes)
 
-<div class="proposal-footer">
+<div class="proposal-footer" data-section=footer">
   <p>Atoms Digital Solutions Private Limited</p>
   <p>Flat No. 301, Sri Siva Sankari Nilayam, Gorantla, Guntur – 522034, Andhra Pradesh</p>
   <p>contact@atomsdigital.in | www.atomsdigital.in</p>
@@ -637,6 +637,13 @@ Output ONLY clean HTML — no markdown fences, no code blocks, no explanatory te
 
 Wrap each section (EXCEPT Header and Footer) in:
 <div class="proposal-section"><h2 class="section-title">TITLE</h2>...</div>
+Wrap each section (EXCEPT Header and Footer) in:
+<div class="proposal-section"><h2 class="section-title">TITLE</h2>...</div>
+
+**SECTION IDENTIFICATION (CRITICAL — required for partial-update system):**
+Every top-level section div MUST carry a 'data-section' attribute using the exact key from the "Section key mapping" table above. Example: <div class="proposal-section" data-section="pricing">. Use these exact keys: clientInfo, overview, objectives, serviceScope, deliverables, contentStrategy, addOns, otherStrategies, pricing, whyAtoms, importantNotes, conclusion.
+For each custom section (from overrides.customSections), use 'data-section="custom-N"' where N is its 0-based index among custom sections in THIS proposal (e.g. the first custom section is data-section="custom-0", the second is data-section="custom-1").
+Never omit this attribute, never reuse a key on two different divs, and never invent a key that isn't in the list above.
 
 Use <ul><li> for all bullet lists. Use <ol><li> for numbered sub-category lists inside Content Strategy/Themes.
 Use regular bullet points (●) everywhere else.
