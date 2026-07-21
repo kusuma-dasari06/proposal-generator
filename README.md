@@ -24,15 +24,20 @@ By leveraging state-of-the-art Large Language Models (**Google Gemini**, **Anthr
 * **Seamless Export:** One-click export to professional **PDF documents** or downloadable standalone HTML files using integrated browser rendering engines.
 * **Refinement Loop:** Chat dynamically with the agent while viewing the summary to tweak pricing, adjust deliverables, or modify terms—the proposal updates seamlessly.
 
-### 🛠️ 3. Hidden System Prompt Studio & AI Co-pilot
+### 🧩 3. Section-Wise Partial Proposal Editing
+* **JSON-Sectioned Storage:** Every generated proposal is split into individually addressable sections (Overview, Objectives, Service Scope, Pricing, Why Atoms, etc.) and stored as a `proposal_sections` JSONB array in Supabase — not just one flat HTML blob.
+* **Surgical Updates, Not Full Regenerates:** When a refinement request only affects one part of the proposal (e.g. "change the price to ₹55,000"), the system detects exactly which section owns that change and regenerates **only that section**. Every other section's HTML stays byte-for-byte identical — no more full-document drift on every edit.
+* **Full Regenerate Fallback:** If core client data changes (name, package, platforms) or a custom section is added/removed, the system safely falls back to a full regenerate, since those changes can affect the whole document.
+
+### 🛠️ 4. Hidden System Prompt Studio & AI Co-pilot
 * **Cloud Persistence & Hydration:** Saved prompt rules are stored directly in **Supabase**, instantly applying across all user sessions without code deployments.
 * **🤖 Prompt Co-pilot Assistant:** An integrated AI side-drawer that evaluates prompt modification safety, prevents JSON schema breakage, and provides one-click code snippet insertion.
 
-### ☁️ 4. Cloud Session Management & History
+### ☁️ 5. Cloud Session Management & History
 * **Persistent Chat Sidebar:** Easily navigate, rename, reload, or delete past proposal sessions.
 * **Supabase Database Sync:** Automatically serializes chat messages, proposal JSON data, and client metadata to PostgreSQL, ensuring zero data loss across browser reloads or devices.
 
-### 🎨 5. Premium UI/UX & WebGL Aesthetics
+### 🎨 6. Premium UI/UX & WebGL Aesthetics
 * **LiquidEther Shaders:** Features a dynamic, interactive WebGL fluid background shader powered by Three.js.
 * **Modern Glassmorphism:** Sleek dark mode aesthetic with smooth micro-animations and transitions powered by **Framer Motion**.
 
@@ -95,7 +100,7 @@ Run the included SQL migration scripts inside your Supabase **SQL Editor** to cr
 1. Execute `supabase/migrations/supabase_schema.sql` *(Core proposal sessions table)*
 2. Execute `supabase/migrations/supabase_migration_chat_history.sql` *(Chat history and serialization)*
 3. Execute `supabase/migrations/supabase_migration_system_prompts.sql` *(Dynamic system prompt persistence)*
-
+4. Execute `supabase/migrations/supabase_migration_proposal_sections.sql` *(Section-wise JSON storage for partial proposal edits)*
 ---
 
 ### 4️⃣ Start Development Server
