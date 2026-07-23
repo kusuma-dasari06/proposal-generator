@@ -2139,9 +2139,43 @@ body {
   padding: 0;
 }
 
-.print-layout-header,
+.print-layout-header {
+  display: table-header-group;
+}
+
 .print-layout-footer {
   display: none;
+}
+
+.proposal-letterhead-paper {
+  position: relative;
+  background: white;
+  min-height: 11in;
+  max-width: 8.5in;
+  margin: 0 auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.letterhead-header {
+  position: relative;
+  height: 3.5in;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: white;
+}
+
+.letterhead-bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: top center;
+  z-index: 1;
 }
 
 /* ── Print ─────────────────────────────────────────────────── */

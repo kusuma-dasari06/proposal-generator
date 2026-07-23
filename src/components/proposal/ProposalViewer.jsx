@@ -249,33 +249,16 @@ export default function ProposalViewer({ proposalHtml, isGenerating, proposalJso
                 </div>
               </div>
 
-                            {/* Proposal content */}
+                             {/* Proposal content */}
               <div className="proposal-scroll-area">
                 <div className="proposal-letterhead-paper">
-                  <div className="letterhead-header">
-                    <img src={letterheadWatermark} alt="Letterhead" className="letterhead-bg-image" />
-                    <div className="print-header-top">
-                      <div className="print-header-brand">
-                        <img src={atomLogo} alt="Atoms Logo" className="print-logo" />
-                        <div className="print-brand-text">
-                          <span className="print-brand-name">atoms</span>
-                          <span className="print-brand-tagline">Digital Solutions</span>
-                        </div>
-                      </div>
-                      <div className="print-header-info">
-                        <div className="print-header-company">ATOMS DIGITAL SOLUTIONS PRIVATE LIMITED</div>
-                        <div>CIN: U62099AP2023PTC111381</div>
-                        <div>+91 73967 43341</div>
-                        <div className="print-header-email">atomsdigitalsolutions@gmail.com</div>
-                      </div>
-                    </div>
-                  </div>
-
                   <table className="print-layout-table">
                     <thead className="print-layout-header">
                       <tr>
                         <td>
-                          <div className="print-only-header-space" />
+                          <div className="letterhead-header">
+                            <img src={letterheadWatermark} alt="Letterhead" className="letterhead-bg-image" />
+                          </div>
                         </td>
                       </tr>
                     </thead>
@@ -310,7 +293,7 @@ export default function ProposalViewer({ proposalHtml, isGenerating, proposalJso
                     </tfoot>
                   </table>
                 </div>
-              </div>
+              </div>             
             </div>
           </StatePanel>
         )}
