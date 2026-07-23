@@ -249,17 +249,17 @@ export default function ProposalViewer({ proposalHtml, isGenerating, proposalJso
                 </div>
               </div>
 
-                           {/* Proposal content */}
+                            {/* Proposal content */}
               <div className="proposal-scroll-area">
                 <div className="proposal-letterhead-paper">
-                  {/* Background Watermark Image */}
-                  <img src={letterheadWatermark} alt="" className="watermark-bg-center" />
-
                   <table className="print-layout-table">
                     <thead className="print-layout-header">
                       <tr>
                         <td>
                           <div className="print-only-header">
+                            {/* Background Watermark Image - inside thead so it repeats on EVERY page */}
+                            <img src={letterheadWatermark} alt="" className="watermark-bg-center" />
+
                             <div className="print-header-top">
                               <div className="print-header-brand">
                                 <img src={atomLogo} alt="Atoms Logo" className="print-logo" />
@@ -313,7 +313,7 @@ export default function ProposalViewer({ proposalHtml, isGenerating, proposalJso
                     </tfoot>
                   </table>
                 </div>
-              </div>                         
+              </div>                               
             </div>
           </StatePanel>
         )}
