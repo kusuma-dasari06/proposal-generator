@@ -249,7 +249,7 @@ export default function ProposalViewer({ proposalHtml, isGenerating, proposalJso
                 </div>
               </div>
 
-                             {/* Proposal content */}
+                           {/* Proposal content */}
               <div className="proposal-scroll-area">
                 <div className="proposal-letterhead-paper">
                   {/* Background Watermark Image */}
@@ -285,7 +285,9 @@ export default function ProposalViewer({ proposalHtml, isGenerating, proposalJso
                         <td>
                           <div
                             className="proposal-content"
-                            dangerouslySetInnerHTML={{ __html: proposalHtml }}
+                            dangerouslySetInnerHTML={{
+                              __html: (proposalHtml || '').replace(/<div[^>]*class="proposal-footer"[\s\S]*?<\/div>/gi, '')
+                            }}
                           />
                         </td>
                       </tr>
@@ -311,7 +313,7 @@ export default function ProposalViewer({ proposalHtml, isGenerating, proposalJso
                     </tfoot>
                   </table>
                 </div>
-              </div>                  
+              </div>                         
             </div>
           </StatePanel>
         )}
