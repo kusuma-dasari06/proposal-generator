@@ -2214,56 +2214,114 @@ body {
   }
 
   .print-only-header {
+    display: block !important;
+    position: relative;
+    height: 3.5in;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .print-header-top {
     display: flex !important;
-    flex-direction: column;
-    align-items: center;
-    border-bottom: 2px solid #1a237e;
-    padding-bottom: 12px;
-    margin-bottom: 24px;
-    padding-top: 10px;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 0.3in 1cm 0 1cm;
   }
 
   .print-header-brand {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 12px;
+    gap: 10px;
   }
 
   .print-logo {
-    height: 44px;
-    width: 44px;
-    filter: drop-shadow(0 0 4px rgba(26, 115, 232, 0.4));
+    height: 40px;
+    width: 40px;
+  }
+
+  .print-brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
   }
 
   .print-brand-name {
-    font-size: 20pt;
+    font-size: 17pt;
     font-weight: 700;
-    color: #1a237e;
+    color: #2b59d1;
     font-family: 'Inter', sans-serif;
-    letter-spacing: -0.5px;
   }
 
-  .print-only-footer {
-    display: block !important;
-    border-top: 2px solid #1a237e;
-    margin-top: 24px;
-    padding-top: 12px;
-    padding-bottom: 10px;
+  .print-brand-tagline {
+    font-size: 8.5pt;
+    font-weight: 600;
+    color: #2b59d1;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .print-header-info {
+    text-align: right;
+    font-size: 8.5pt;
+    color: #1a1a1a;
+    font-family: 'Times New Roman', serif;
+    line-height: 1.5;
+  }
+
+  .print-header-company {
+    font-weight: 700;
+    font-size: 9.5pt;
+    margin-bottom: 2px;
+  }
+
+  .print-header-email {
+    text-decoration: underline;
+  }
+
+  .print-header-line {
+    height: 1.5px;
+    width: 100%;
+    background: #2b59d1;
+    margin-top: 10px;
+  }
+
+  .print-header-watermark {
+    position: absolute;
+    top: 1.3in;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2.1in;
+    opacity: 0.9;
   }
 
   .proposal-scroll-area {
     position: relative !important;
   }
 
-  .print-footer-content {
+  .print-only-footer {
+    display: block !important;
+  }
+
+  .print-footer-address {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-    font-size: 9.5pt;
-    color: #555555;
+    align-items: flex-start;
+    gap: 8px;
+    border-top: 1px solid #999999;
+    padding: 0.12in 1cm 0.1in 1cm;
+    font-size: 8.5pt;
+    color: #333333;
     font-family: 'Inter', sans-serif;
+  }
+
+  .print-footer-pin {
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: #333333;
+  }
+
+  .print-footer-bar {
+    height: 14px;
+    width: 100%;
+    background: #3a3a3a;
   }
 
   .proposal-content {
