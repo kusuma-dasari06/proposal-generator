@@ -249,64 +249,67 @@ export default function ProposalViewer({ proposalHtml, isGenerating, proposalJso
                 </div>
               </div>
 
-              {/* Proposal content */}
+                            {/* Proposal content */}
               <div className="proposal-scroll-area">
-                <table className="print-layout-table">
-                  <thead className="print-layout-header">
-                    <tr>
-                      <td>
-                        <div className="print-only-header">
-                          <div className="print-header-top">
-                            <div className="print-header-brand">
-                              <img src={atomLogo} alt="Atoms Logo" className="print-logo" />
-                              <div className="print-brand-text">
-                                <span className="print-brand-name">atoms</span>
-                                <span className="print-brand-tagline">Digital Solutions</span>
-                              </div>
-                            </div>
-                            <div className="print-header-info">
-                              <div className="print-header-company">ATOMS DIGITAL SOLUTIONS PRIVATE LIMITED</div>
-                              <div>CIN: U62099AP2023PTC111381</div>
-                              <div>+91 73967 43341</div>
-                              <div className="print-header-email">atomsdigitalsolutions@gmail.com</div>
-                            </div>
-                          </div>
-                          <div className="print-header-line" />
-                          <img src={letterheadWatermark} alt="" className="print-header-watermark" />
+                <div className="proposal-letterhead-paper">
+                  <div className="letterhead-header">
+                    <img src={letterheadWatermark} alt="Letterhead" className="letterhead-bg-image" />
+                    <div className="print-header-top">
+                      <div className="print-header-brand">
+                        <img src={atomLogo} alt="Atoms Logo" className="print-logo" />
+                        <div className="print-brand-text">
+                          <span className="print-brand-name">atoms</span>
+                          <span className="print-brand-tagline">Digital Solutions</span>
                         </div>
-                      </td>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <div
-                          className="proposal-content"
-                          dangerouslySetInnerHTML={{ __html: proposalHtml }}
-                        />
-                      </td>
-                    </tr>
-                  </tbody>
-                  <tfoot className="print-layout-footer">
-                    <tr>
-                      <td>
-                        <div className="print-only-footer">
-                          <div className="print-footer-address">
-                            <svg className="print-footer-pin" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                              <circle cx="12" cy="10" r="3" />
-                            </svg>
-                            <span>
-                              Atoms Digital Solutions Private Limited, Flat No. 301, Sri Siva Sankari Nilayam,
-                              Gorantla, Guntur – 522034, Andhra Pradesh
-                            </span>
+                      </div>
+                      <div className="print-header-info">
+                        <div className="print-header-company">ATOMS DIGITAL SOLUTIONS PRIVATE LIMITED</div>
+                        <div>CIN: U62099AP2023PTC111381</div>
+                        <div>+91 73967 43341</div>
+                        <div className="print-header-email">atomsdigitalsolutions@gmail.com</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <table className="print-layout-table">
+                    <thead className="print-layout-header">
+                      <tr>
+                        <td>
+                          <div className="print-only-header-space" />
+                        </td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <div
+                            className="proposal-content"
+                            dangerouslySetInnerHTML={{ __html: proposalHtml }}
+                          />
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tfoot className="print-layout-footer">
+                      <tr>
+                        <td>
+                          <div className="print-only-footer">
+                            <div className="print-footer-address">
+                              <svg className="print-footer-pin" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                <circle cx="12" cy="10" r="3" />
+                              </svg>
+                              <span>
+                                Atoms Digital Solutions Private Limited, Flat No. 301, Sri Siva Sankari Nilayam,
+                                Gorantla, Guntur – 522034, Andhra Pradesh
+                              </span>
+                            </div>
+                            <div className="print-footer-bar" />
                           </div>
-                          <div className="print-footer-bar" />
-                        </div>
-                      </td>
-                    </tr>
-                  </tfoot>
-                </table>
+                        </td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
               </div>
             </div>
           </StatePanel>
