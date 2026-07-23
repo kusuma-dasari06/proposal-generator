@@ -7,6 +7,24 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import ChatMessage from './ChatMessage';
 import TypingIndicator from './TypingIndicator';
+import { useVoiceInput } from '../../hooks/useVoiceInput';
+
+// Clean line-art icons (white, matches app's minimal aesthetic)
+const MicIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+    <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+    <line x1="12" y1="19" x2="12" y2="23" />
+    <line x1="8" y1="23" x2="16" y2="23" />
+  </svg>
+);
+
+const SendArrowIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <line x1="12" y1="19" x2="12" y2="5" />
+    <polyline points="5 12 12 5 19 12" />
+  </svg>
+);
 
 export default function ChatInterface({
   messages,
@@ -46,15 +64,37 @@ export default function ChatInterface({
     inputRef.current?.focus();
   }, []);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const sendCurrentInput = useCallback(() => {
     if (!input.trim() || isTyping || isGenerating) return;
     onSendMessage(input.trim());
     setInput('');
-    // Reset textarea height after send
     if (inputRef.current) {
       inputRef.current.style.height = 'auto';
       inputRef.current.style.overflowY = 'hidden';
+    }
+  }, [input, isTyping, isGenerating, onSendMessage]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    sendCurrentInput();
+  };
+
+  const { isListening, isSupported, toggleListening, stopListening, updateBaseText } = useVoiceInput({
+    onResult: (text) => {
+      setInput(text);
+      requestAnimationFrame(() => autoResize(inputRef.current));
+    },
+    onError: (err) => {
+      console.warn('[Voice] recognition error:', err);
+    },
+  });
+
+  const handleMicClick = () => {
+    if (isListening) {
+      stopListening();
+      setTimeout(sendCurrentInput, 150);
+    } else {
+      toggleListening(input);
     }
   };
 
@@ -126,16 +166,30 @@ export default function ChatInterface({
             onChange={(e) => {
               setInput(e.target.value);
               autoResize(e.target);
+              if (isListening) updateBaseText(e.target.value);
             }}
             onKeyDown={handleKeyDown}
             placeholder={
-              isRefinementMode
+              isListening
+                ? 'Listening...'
+                : isRefinementMode
                 ? 'Type a change (e.g. "Change price to ₹70,000")...'
                 : 'Enter client details here...'
             }
             rows={1}
             disabled={isTyping || isGenerating}
           />
+          {isSupported && (
+            <button
+              type="button"
+              className={`btn-mic ${isListening ? 'listening' : ''}`}
+              onClick={handleMicClick}
+              disabled={isTyping || isGenerating}
+              title={isListening ? 'Tap to send' : 'Speak'}
+            >
+              {isListening ? <SendArrowIcon /> : <MicIcon />}
+            </button>
+          )}
           <button
             type="submit"
             className="btn-send"
