@@ -2188,6 +2188,18 @@ body {
   width: 100%;
   height: auto;
 }
+.watermark-bg-center {
+  position: absolute;
+  top: 2.2in;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5.5in;
+  max-width: 85%;
+  opacity: 0.22;
+  pointer-events: none;
+  z-index: 0;
+  display: block;
+}
 /* ── Print ─────────────────────────────────────────────────── */
 @media print {
 
