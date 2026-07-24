@@ -277,7 +277,8 @@ export default function ProposalViewer({ proposalHtml, isGenerating, proposalJso
                                 .trim()
                                 .replace(/<div[^>]*class="proposal-footer"[\s\S]*?<\/div>/gi, '')
                                 .replace(/<div[^>]*class="agency-name"[^>]*>[\s\S]*?<\/div>/gi, '')
-                                .replace(/^(\s*<br\s*\/?>|\s*<p>\s*<\/p>|\s*<div>\s*<\/div>|\s*\n)+/gi, '')
+                                .replace(/&nbsp;/gi, ' ')
+                                .replace(/^(\s*<br\s*\/?>|\s*<(p|div|h1|h2|h3|h4|h5|h6|span)[^>]*>\s*<\/\2>|\s*\n)+/gi, '')
                             }}
                           />    
                         </td>
