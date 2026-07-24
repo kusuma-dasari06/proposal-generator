@@ -2240,15 +2240,16 @@ body {
     overflow: hidden !important;
   }
 
-  html,
+    html,
   body,
   #root,
-    .app-root,
+  .app-root,
   .app-shell,
   .app-body,
   .app-main,
   .pane-proposal,
   .glass-card,
+  .proposal-viewer,
   .proposal-scroll-area,
   .state-panel {
     height: auto !important;
