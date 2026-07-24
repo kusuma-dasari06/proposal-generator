@@ -274,10 +274,12 @@ export default function ProposalViewer({ proposalHtml, isGenerating, proposalJso
                             className="proposal-content"
                             dangerouslySetInnerHTML={{
                               __html: (proposalHtml || '')
+                                .trim()
                                 .replace(/<div[^>]*class="proposal-footer"[\s\S]*?<\/div>/gi, '')
                                 .replace(/<div[^>]*class="agency-name"[^>]*>[\s\S]*?<\/div>/gi, '')
+                                .replace(/^(\s*<br\s*\/?>|\s*<p>\s*<\/p>|\s*<div>\s*<\/div>|\s*\n)+/gi, '')
                             }}
-                          />
+                          />    
                         </td>
                       </tr>
                     </tbody>
