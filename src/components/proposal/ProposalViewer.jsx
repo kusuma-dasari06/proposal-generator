@@ -6,8 +6,9 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { saveAs } from 'file-saver';
-import atomLogo from '../../assets/atomlogo.png';
 import letterheadWatermark from '../../assets/letterhead-watermark.png';
+import letterheadHeaderImg from '../../assets/letterhead-header.png';
+import letterheadFooterImg from '../../assets/letterhead-footer.png';
 
 // ── Shared page-transition variants ──────────────────────────
 // Exit:  current state shrinks slightly and fades out
@@ -254,29 +255,13 @@ export default function ProposalViewer({ proposalHtml, isGenerating, proposalJso
                 <div className="proposal-letterhead-paper">
                   {/* Background Watermark Image - Outside table, position fixed in print CSS to repeat on all pages */}
                   <img src={letterheadWatermark} alt="" className="watermark-bg-center" />
-                  
                   <table className="print-layout-table">
                     <thead className="print-layout-header">
                       <tr>
                         <td>
                           <div className="print-only-header">
-
-                            <div className="print-header-top">
-                              <div className="print-header-brand">
-                                <img src={atomLogo} alt="Atoms Logo" className="print-logo" />
-                                <div className="print-brand-text">
-                                  <span className="print-brand-name">atoms</span>
-                                  <span className="print-brand-tagline">Digital Solutions</span>
-                                </div>
-                              </div>
-                              <div className="print-header-info">
-                                <div className="print-header-company">ATOMS DIGITAL SOLUTIONS PRIVATE LIMITED</div>
-                                <div>CIN: U62099AP2023PTC111381</div>
-                                <div>+91 73967 43341</div>
-                                <div className="print-header-email">atomsdigitalsolutions@gmail.com</div>
-                              </div>
-                            </div>
-                            <div className="print-header-line" />
+                            {/* Exact letterhead header strip — pixel-identical to the official letterhead PDF */}
+                            <img src={letterheadHeaderImg} alt="Atoms Digital Solutions" className="letterhead-header-img" />
                           </div>
                         </td>
                       </tr>
@@ -297,24 +282,15 @@ export default function ProposalViewer({ proposalHtml, isGenerating, proposalJso
                       <tr>
                         <td>
                           <div className="print-only-footer">
-                            <div className="print-footer-address">
-                              <svg className="print-footer-pin" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                                <circle cx="12" cy="10" r="3" />
-                              </svg>
-                              <span>
-                                Atoms Digital Solutions Private Limited, Flat No. 301, Sri Siva Sankari Nilayam,
-                                Gorantla, Guntur – 522034, Andhra Pradesh
-                              </span>
-                            </div>
-                            <div className="print-footer-bar" />
+                            {/* Exact letterhead footer strip — pixel-identical to the official letterhead PDF */}
+                            <img src={letterheadFooterImg} alt="" className="letterhead-footer-img" />
                           </div>
                         </td>
                       </tr>
                     </tfoot>
                   </table>
                 </div>
-              </div>
+              </div>                               
             </div>
           </StatePanel>
         )}
