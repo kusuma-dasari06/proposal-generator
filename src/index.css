@@ -2286,26 +2286,17 @@ body {
     height: auto !important;
   }
 
- .watermark-bg-center {
-  position: absolute !important;
-  top: 2.2in !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  width: 5.5in !important;
-  max-width: 80% !important;
-  opacity: 0.20 !important;
-  z-index: 0 !important;
-  display: block !important;
-  pointer-events: none !important;
-  -webkit-print-color-adjust: exact !important;
-  print-color-adjust: exact !important;
-}
+ 
   .proposal-letterhead-paper {
     box-shadow: none !important;
     border-radius: 0 !important;
     max-width: none !important;
     width: 100% !important;
     background: transparent !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    position: static !important;
   }
 
   .proposal-content,
