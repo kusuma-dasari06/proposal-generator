@@ -75,9 +75,10 @@ export default function ProposalViewer({ proposalHtml, isGenerating, proposalJso
     if (!proposalHtml) return;
     setIsExporting(true);
     try {
-      // Strip any leading/trailing whitespace, empty tags, or <br> from the AI output
+      // Strip any leading/trailing whitespace, empty tags, <br>, and legacy agency-name from the AI output
       const cleanHtml = proposalHtml
         .trim()
+        .replace(/<div[^>]*class="agency-name"[^>]*>[\s\S]*?<\/div>/gi, '')
         .replace(/^(\s*<br\s*\/?>|\s*<p>\s*<\/p>|\s*<div>\s*<\/div>|\s*\n)+/gi, '');
 
       // Build Word HTML as a single tight string — NO template literal indentation
@@ -272,7 +273,9 @@ export default function ProposalViewer({ proposalHtml, isGenerating, proposalJso
                           <div
                             className="proposal-content"
                             dangerouslySetInnerHTML={{
-                              __html: (proposalHtml || '').replace(/<div[^>]*class="proposal-footer"[\s\S]*?<\/div>/gi, '')
+                              __html: (proposalHtml || '')
+                                .replace(/<div[^>]*class="proposal-footer"[\s\S]*?<\/div>/gi, '')
+                                .replace(/<div[^>]*class="agency-name"[^>]*>[\s\S]*?<\/div>/gi, '')
                             }}
                           />
                         </td>

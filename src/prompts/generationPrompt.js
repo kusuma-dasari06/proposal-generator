@@ -130,7 +130,6 @@ Section key mapping for sectionTitles:
 ## 1. HEADER — FIXED (Never changes)
 
 <div class="proposal-header" data-section="header">
-  <div class="agency-name">ATOMS DIGITAL SOLUTIONS PRIVATE LIMITED</div>
   <div class="agency-tagline">Digital Marketing Proposal</div>
   <div class="proposal-meta">
     <div class="proposal-label">Prepared for: {{CLIENT_NAME}}</div>
