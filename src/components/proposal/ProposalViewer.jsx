@@ -254,13 +254,13 @@ export default function ProposalViewer({ proposalHtml, isGenerating, proposalJso
             {/* Proposal content */}
               <div className="proposal-scroll-area">
                 <div className="proposal-letterhead-paper">
-                  {/* Background Watermark Image - Outside table, position fixed in print CSS to repeat on all pages */}
-                  <img src={letterheadWatermark} alt="" className="watermark-bg-center" />
                   <table className="print-layout-table">
                     <thead className="print-layout-header">
                       <tr>
                         <td>
                           <div className="print-only-header">
+                            {/* Background Watermark Image - inside thead so it repeats on EVERY printed page */}
+                            <img src={letterheadWatermark} alt="" className="watermark-bg-center" />
                             {/* Exact letterhead header strip — pixel-identical to the official letterhead PDF */}
                             <img src={letterheadHeaderImg} alt="Atoms Digital Solutions" className="letterhead-header-img" />
                           </div>
