@@ -251,7 +251,7 @@ export default function ProposalViewer({ proposalHtml, isGenerating, proposalJso
                 </div>
               </div>
 
-              {/* Proposal content */}
+            {/* Proposal content */}
               <div className="proposal-scroll-area">
                 <div className="proposal-letterhead-paper">
                   {/* Background Watermark Image - Outside table, position fixed in print CSS to repeat on all pages */}
