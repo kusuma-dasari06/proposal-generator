@@ -2139,13 +2139,154 @@ body {
   padding: 0;
 }
 
-.print-layout-header,
+.print-layout-header {
+  display: table-header-group;
+}
+
 .print-layout-footer {
+  display: none;
+}
+
+.proposal-letterhead-paper {
+  position: relative;
+  background: white;
+  min-height: 11in;
+  max-width: 8.5in;
+  margin: 0 auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Background Watermark Image in Center of Page */
+.watermark-bg-center {
+  position: absolute !important;
+  top: 2.2in !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 5.5in !important;
+  max-width: 85% !important;
+  opacity: 0.22 !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+  display: block !important;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+
+.print-layout-table {
+  width: 100%;
+  border-collapse: collapse;
+  position: relative !important;
+  z-index: 1 !important;
+  background: transparent !important;
+}
+
+.print-only-header {
+  display: block;
+  padding: 0.35in 0.5in 0.1in 0.5in;
+  background: transparent;
+}
+
+.print-header-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.print-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.print-logo {
+  height: 42px;
+  width: 42px;
+}
+
+.print-brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.print-brand-name {
+  font-size: 18pt;
+  font-weight: 700;
+  color: #2b59d1;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: -0.5px;
+}
+
+.print-brand-tagline {
+  font-size: 8.5pt;
+  font-weight: 600;
+  color: #2b59d1;
+  font-family: 'Inter', sans-serif;
+}
+
+.print-header-info {
+  text-align: right;
+  font-size: 8pt;
+  color: #333333;
+  font-family: 'Times New Roman', serif;
+  line-height: 1.4;
+}
+
+.print-header-company {
+  font-weight: 700;
+  font-size: 9pt;
+  margin-bottom: 2px;
+  color: #1a1a1a;
+}
+
+.print-header-email {
+  text-decoration: underline;
+  color: #2b59d1;
+}
+
+.print-header-line {
+  height: 1.5px;
+  width: 100%;
+  background: #2b59d1;
+  margin-top: 10px;
+}
+
+.print-only-footer {
+  display: block;
+  padding: 0.15in 0.5in 0.25in 0.5in;
+  background: transparent;
+}
+
+.print-footer-address {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  border-top: 1px solid #d0d0d0;
+  padding-top: 8px;
+  font-size: 8pt;
+  color: #555555;
+  font-family: 'Inter', sans-serif;
+}
+
+.print-footer-pin {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: #555555;
+}
+
+.print-footer-bar {
   display: none;
 }
 
 /* ── Print ─────────────────────────────────────────────────── */
 @media print {
+
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
 
   /* Setting page margin to 0 tricks the browser into disabling the 
      default Date, Title, URL, and Page Numbers from printing. */
@@ -2215,82 +2356,37 @@ body {
 
   .print-only-header {
     display: block !important;
-    position: relative;
-    height: 3.5in;
-    overflow: hidden;
-    box-sizing: border-box;
+    position: relative !important;
+    padding: 0.35in 0.5in 0.1in 0.5in !important;
+    background: transparent !important;
   }
 
-  .print-header-top {
-    display: flex !important;
-    align-items: flex-start;
-    justify-content: space-between;
-    padding: 0.3in 1cm 0 1cm;
+  .watermark-bg-center {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 5.5in !important;
+    max-width: 80% !important;
+    opacity: 0.20 !important;
+    z-index: 0 !important;
+    display: block !important;
+    pointer-events: none !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
-  .print-header-brand {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  .proposal-letterhead-paper {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    max-width: none !important;
+    width: 100% !important;
+    background: transparent !important;
   }
 
-  .print-logo {
-    height: 40px;
-    width: 40px;
-  }
-
-  .print-brand-text {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.15;
-  }
-
-  .print-brand-name {
-    font-size: 17pt;
-    font-weight: 700;
-    color: #2b59d1;
-    font-family: 'Inter', sans-serif;
-  }
-
-  .print-brand-tagline {
-    font-size: 8.5pt;
-    font-weight: 600;
-    color: #2b59d1;
-    font-family: 'Inter', sans-serif;
-  }
-
-  .print-header-info {
-    text-align: right;
-    font-size: 8.5pt;
-    color: #1a1a1a;
-    font-family: 'Times New Roman', serif;
-    line-height: 1.5;
-  }
-
-  .print-header-company {
-    font-weight: 700;
-    font-size: 9.5pt;
-    margin-bottom: 2px;
-  }
-
-  .print-header-email {
-    text-decoration: underline;
-  }
-
-  .print-header-line {
-    height: 1.5px;
-    width: 100%;
-    background: #2b59d1;
-    margin-top: 10px;
-  }
-
-  .print-header-watermark {
-    position: absolute;
-    top: 1.3in;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 2.1in;
-    opacity: 0.9;
+  .proposal-content,
+  .proposal-content * {
+    background: transparent !important;
   }
 
   .proposal-scroll-area {
@@ -2327,7 +2423,7 @@ body {
   .proposal-content {
     display: block !important;
     position: static !important;
-    background: white !important;
+    background: transparent !important;
     color: black !important;
     border: none !important;
     box-shadow: none !important;
