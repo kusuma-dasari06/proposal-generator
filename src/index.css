@@ -2213,6 +2213,7 @@ body {
 
   @page {
     margin: 0;
+    size: A4;
   }
 
   .pane-chat,
@@ -2286,10 +2287,10 @@ body {
   }
 
   .watermark-bg-center {
-    position: absolute !important;
-    top: 2.2in !important;
+    position: fixed !important;
+    top: 50% !important;
     left: 50% !important;
-    transform: translateX(-50%) !important;
+    transform: translate(-50%, -50%) !important;
     width: 5.5in !important;
     max-width: 80% !important;
     opacity: 0.20 !important;
@@ -2299,7 +2300,6 @@ body {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
-
   .proposal-letterhead-paper {
     box-shadow: none !important;
     border-radius: 0 !important;
