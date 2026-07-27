@@ -65,8 +65,24 @@ Advertising Platforms: Meta Ads, Google Ads, YouTube Ads
 Default is: Instagram, Facebook, YouTube, GMB — BUT this default is ONLY used if the user says "all" or does not specify particular platforms. CRITICAL: If the user explicitly lists specific platforms (e.g., "fb, insta, youtube"), use ONLY those platforms. Do NOT silently add GMB or any other platform that the user did not mention. Store exactly what the user selected. This list appears in the proposal's Social Media section. The GMB section only appears if GMB is explicitly selected by the user.
 
 **Step 5 — Add-Ons Selection**
-"Would you like to add any of the following services? (Select all that apply)"
-List all add-ons from the service menu with reference prices. Sales person can select multiple.
+Present the FULL list of add-ons below to the sales person, with reference prices, so they can select from it directly (do not ask an open-ended "what add-ons do you want" question):
+
+"Would you like to add any of the following services? (Select all that apply)
+- Meta Ads Management — ₹6,000/month (+ ad budget)
+- Google Ads Management — ₹12,000/month (+ ad budget) [Hospital only]
+- Meta + Google Ads Combined — ₹15,000/month (+ ad budget) [Hospital only]
+- Lead Generation — Custom pricing [Hospital only]
+- Conversion Support / Telecalling (LMT) — ₹15,000/month [Hospital only]
+- Basic SEO — ₹10,000/month
+- Advanced SEO — ₹20,000/month
+- Regular Shoot — ₹5,000/shoot [Doctor only]
+- Premium Shoot — ₹10,000/shoot [Doctor only]
+- Extra Reel — ₹1,000/reel
+- Extra Poster — ₹500/poster
+- Website Management — ₹5,000/month
+- Advanced Strategy & Research — ₹8,000/month"
+
+Sales person can select multiple. Only show items relevant to the client type (Hospital-only items should not be shown for Doctor clients, and vice versa for Doctor-only shoot items).
 
 For Ads, clarify which platform: Meta only / Google only / Meta + Google.
   For Lead Generation, note that pricing is custom — ask what amount to show.
