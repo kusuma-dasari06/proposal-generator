@@ -2213,30 +2213,6 @@ body {
     size: A4;
   }
 
-  .pane-chat,
-  .app-header,
-  .proposal-toolbar,
-  .chat-header,
-  .proposal-panel-header,
-  .liquid-ether-container,
-  .chat-sidebar,
-  .sidebar-backdrop,
-  .sysprompt-panel,
-  .sysprompt-backdrop,
-  .gs-sidebar,
-  .app-main-footer,
-  canvas,
-  [style*="position: fixed"],
-  [style*="position:fixed"] {
-    display: none !important;
-    visibility: hidden !important;
-    width: 0 !important;
-    height: 0 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    overflow: hidden !important;
-  }
-
     html,
   body,
   #root,
@@ -2262,6 +2238,31 @@ body {
     padding: 0 !important;
     margin: 0 !important;
   }
+
+  .pane-chat,
+  .app-header,
+  .proposal-toolbar,
+  .chat-header,
+  .proposal-panel-header,
+  .liquid-ether-container,
+  .chat-sidebar,
+  .sidebar-backdrop,
+  .sysprompt-panel,
+  .sysprompt-backdrop,
+  .gs-sidebar,
+  .app-main-footer,
+  canvas,
+  [style*="position: fixed"],
+  [style*="position:fixed"] {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+  
   .print-layout-header {
     display: table-header-group !important;
   }
