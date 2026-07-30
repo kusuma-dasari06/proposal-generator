@@ -2358,7 +2358,7 @@ body {
   .proposal-section {
     page-break-inside: auto;
     break-inside: auto;
-    margin-bottom: 20px !important;
+    margin-bottom: 8px !important;
   }
 
   .section-title,
@@ -2382,14 +2382,10 @@ body {
     break-inside: avoid;
   }
 
-  h3 + .section-subtitle,
-  h3 + ul,
-  h3 + ol,
-  h4 + ul,
-  h4 + ol {
-    page-break-before: avoid;
-    break-before: avoid;
-  }
+  h3 + .section-subtitle {
+  page-break-before: avoid;
+  break-before: avoid;
+ }
 }
 /* ── Animated Logo ────────────────────────────────────────────── */
 .animated-logo-container {
