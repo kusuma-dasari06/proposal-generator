@@ -1765,10 +1765,19 @@ body {
 
 @media print {
   .proposal-content .proposal-section {
-    margin-bottom: 10px;
+    margin-bottom: 6px;
   }
   .proposal-content > .proposal-section:last-of-type {
     margin-bottom: 0;
+  }
+  .proposal-content h3 {
+    margin-top: 8px;
+  }
+  .proposal-content h4 {
+    margin-top: 6px;
+  }
+  .proposal-content li {
+    margin-bottom: 1px;
   }
 }
 
