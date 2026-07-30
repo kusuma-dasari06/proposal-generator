@@ -1759,25 +1759,32 @@ body {
 }
 
 .proposal-content .proposal-section {
-  margin-bottom: 28px;
+  margin-bottom: 14px;
   text-align: left;
 }
 
 @media print {
   .proposal-content .proposal-section {
-    margin-bottom: 6px;
+    margin-bottom: 6px !important;
   }
   .proposal-content > .proposal-section:last-of-type {
     margin-bottom: 0;
   }
   .proposal-content h3 {
-    margin-top: 8px;
+    margin-top: 4px !important;
+    margin-bottom: 2px !important;
   }
   .proposal-content h4 {
-    margin-top: 6px;
+    margin-top: 4px !important;
+    margin-bottom: 2px !important;
+  }
+  .proposal-content p {
+    line-height: 1.35 !important;
+    margin-bottom: 4px !important;
   }
   .proposal-content li {
-    margin-bottom: 1px;
+    line-height: 1.35 !important;
+    margin-bottom: 1px !important;
   }
 }
 
@@ -1811,16 +1818,16 @@ body {
   font-size: 0.95rem;
   font-weight: 700;
   color: #1a237e;
-  margin-bottom: 6px;
-  margin-top: 14px;
+  margin-bottom: 4px;
+  margin-top: 8px;
 }
 
 .proposal-content h3 {
   font-size: 0.85rem;
   font-weight: 700;
   color: #333;
-  margin-bottom: 4px;
-  margin-top: 12px;
+  margin-bottom: 3px;
+  margin-top: 8px;
   text-transform: uppercase;
   letter-spacing: 0.3px;
 }
@@ -1829,22 +1836,29 @@ body {
   font-size: 0.82rem;
   font-weight: 600;
   color: #444;
-  margin-bottom: 3px;
-  margin-top: 10px;
+  margin-bottom: 2px;
+  margin-top: 6px;
 }
 
 .proposal-content p {
   font-size: 0.875rem;
-  line-height: 1.8;
+  line-height: 1.45;
   color: #333;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
 .proposal-content ul,
 .proposal-content ol {
-  padding-left: 22px;
-  margin-bottom: 8px;
-  margin-top: 4px;
+  padding-left: 20px;
+  margin-bottom: 6px;
+  margin-top: 2px;
+}
+
+.proposal-content li {
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: #333;
+  margin-bottom: 2px;
 }
 
 /* Nested lists (Content Strategy sub-items) */
