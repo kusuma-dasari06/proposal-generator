@@ -51,6 +51,7 @@ export function replaceSection(sections, key, newHtml) {
 export const OVERRIDE_TO_SECTION = {
   overviewText: 'overview',
   objectivesList: 'objectives',
+  pricingText: 'serviceScope',
   socialMediaExpectedResults: 'serviceScope',
   socialMediaWhatWeDo: 'serviceScope',
   gmbSectionTitle: 'serviceScope',
@@ -68,7 +69,7 @@ export const OVERRIDE_TO_SECTION = {
   reportingExpectedResults: 'serviceScope',
   deliverablesList: 'deliverables',
   contentStrategyThemes: 'contentStrategy',
-  pricingText: 'pricing',
+  pricingText: 'pricing', // handled specially below to also touch serviceScope
   whyAtomsList: 'whyAtoms',
   importantNotesList: 'importantNotes',
   conclusionText: 'conclusion',
@@ -116,6 +117,7 @@ export function getChangedSections(prevOverrides, nextOverrides) {
   changedOverrideKeys.forEach((k) => {
     const sectionKey = OVERRIDE_TO_SECTION[k];
     if (sectionKey) sectionKeySet.add(sectionKey);
+    if (k === 'pricingText') sectionKeySet.add('serviceScope');
   });
 
   const prevTitles = prevOverrides?.sectionTitles || {};
