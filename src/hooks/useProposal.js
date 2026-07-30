@@ -118,11 +118,8 @@ Generate the full proposal HTML now. Output ONLY the HTML — no markdown fences
 
         let nextSections;
 
-        console.log('[DEBUG] hasExisting:', hasExisting, '| coreDataChanged:', coreDataChanged(prevJson, proposalJson));
-        if (!hasExisting || coreDataChanged(prevJson, proposalJson)) {
-          console.log('[DEBUG] → FULL REGENERATE triggered');
-          // First generation, or the underlying client data itself
-          // changed — safest to regenerate the whole proposal.
+        if (!hasExisting) {
+          // First generation only — nothing exists yet to preserve.
           const result = await generateFull(proposalJson);
           nextSections = result.sections;
         } else {
