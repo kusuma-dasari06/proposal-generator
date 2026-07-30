@@ -2363,11 +2363,16 @@ body {
 
   .section-title,
   h1,
-  h2,
+  h2 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
   h3,
   h4 {
     page-break-after: avoid;
     break-after: avoid;
+    orphans: 3;
   }
 
   ul,
@@ -2380,6 +2385,8 @@ body {
   p {
     page-break-inside: avoid;
     break-inside: avoid;
+    orphans: 2;
+    widows: 2;
   }
 
   h3 + .section-subtitle {
