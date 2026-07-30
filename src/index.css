@@ -1763,6 +1763,15 @@ body {
   text-align: left;
 }
 
+@media print {
+  .proposal-content .proposal-section {
+    margin-bottom: 10px;
+  }
+  .proposal-content > .proposal-section:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
 .proposal-content .section-title {
   font-size: 1rem;
   font-weight: 700;
