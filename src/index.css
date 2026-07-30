@@ -2408,38 +2408,43 @@ body {
     color: #1a237e !important;
   }
 
-  .proposal-section {
-    page-break-inside: auto;
-    break-inside: auto;
+    .proposal-section {
+    page-break-inside: auto !important;
+    break-inside: auto !important;
     margin-bottom: 8px !important;
   }
 
   .section-title,
   h1,
   h2 {
-    page-break-after: avoid;
-    break-after: avoid;
+    page-break-after: avoid !important;
+    break-after: avoid !important;
   }
 
   h3,
   h4 {
-    page-break-after: avoid;
-    break-after: avoid;
-    orphans: 3;
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+    orphans: 1 !important;
+    widows: 1 !important;
+    margin-top: 4px !important;
+    margin-bottom: 2px !important;
   }
 
   ul,
   ol {
-    page-break-inside: auto;
-    break-inside: auto;
+    page-break-inside: auto !important;
+    break-inside: auto !important;
+    margin-top: 2px !important;
+    margin-bottom: 4px !important;
   }
 
   li,
   p {
-    page-break-inside: avoid;
-    break-inside: avoid;
-    orphans: 2;
-    widows: 2;
+    page-break-inside: auto !important;
+    break-inside: auto !important;
+    orphans: 1 !important;
+    widows: 1 !important;
   }
 
   h3 + .section-subtitle {
